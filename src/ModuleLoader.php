@@ -4,7 +4,6 @@ namespace Modulatr\Loader;
 
 use Modulatr\Loader\Exceptions\ModuleLoadedException;
 use Modulatr\Loader\Exceptions\UnknownMenuTypeException;
-use Modulatr\Loader\ModuleContract as Module;
 
 /**
  * Class ModuleLoader
@@ -14,7 +13,7 @@ use Modulatr\Loader\ModuleContract as Module;
 class ModuleLoader
 {
     /**
-     * @var Module[]
+     * @var ModuleContract[]
      */
     private $modules = [];
 
@@ -24,7 +23,7 @@ class ModuleLoader
     private $serviceProviders = [];
 
     /**
-     * @var Module
+     * @var ModuleContract
      */
     private $currentModule;
 
@@ -57,7 +56,7 @@ class ModuleLoader
     }
 
     /**
-     * @param Module[] $modules
+     * @param ModuleContract[] $modules
      */
     private function loadModules(array $modules): void
     {
@@ -70,9 +69,9 @@ class ModuleLoader
     /**
      * @param $value
      * @param $key
-     * @return Module
+     * @return ModuleContract
      */
-    private function getModuleFromConfigPair($value, $key): Module
+    private function getModuleFromConfigPair($value, $key): ModuleContract
     {
         if (is_array($value) && is_string($key)) {
             $module = new $key($value);
@@ -83,9 +82,9 @@ class ModuleLoader
     }
 
     /**
-     * @param Module $module
+     * @param ModuleContract $module
      */
-    private function loadModule(Module $module): void
+    private function loadModule(ModuleContract $module): void
     {
         if (array_key_exists($module->getId(), $this->modules)) {
             throw new ModuleLoadedException();
@@ -97,9 +96,9 @@ class ModuleLoader
     }
 
     /**
-     * @param Module $module
+     * @param ModuleContract $module
      */
-    private function loadModuleDependencies(Module $module)
+    private function loadModuleDependencies(ModuleContract $module)
     {
         $dependencies = $module->getDependencies();
         if (!empty($dependencies)) {
@@ -119,9 +118,9 @@ class ModuleLoader
     }
 
     /**
-     * @param Module $module
+     * @param ModuleContract $module
      */
-    private function loadModuleIgnoreDuplicates(Module $module): void
+    private function loadModuleIgnoreDuplicates(ModuleContract $module): void
     {
         if (!array_key_exists($module->getId(), $this->modules)) {
             $this->modules[$module->getId()] = $module;
@@ -132,18 +131,18 @@ class ModuleLoader
     }
 
     /**
-     * @param Module $module
+     * @param ModuleContract $module
      */
-    private function addModuleServiceProviders(Module $module)
+    private function addModuleServiceProviders(ModuleContract $module): void
     {
         $providers = $this->serviceProviders + $module->getServiceProviders();
         $this->serviceProviders = array_unique($providers);
     }
 
     /**
-     * @param Module $module
+     * @param ModuleContract $module
      */
-    public function addModuleMenuItems(Module $module)
+    public function addModuleMenuItems(ModuleContract $module): void
     {
         foreach ($module->getMenuTypes() as $type) {
             if (!in_array($type, $this->menuTypes)) {
@@ -159,9 +158,9 @@ class ModuleLoader
 
     /**
      * @param array $parts
-     * @return Module|null
+     * @return ModuleContract|null
      */
-    private function getCurrentModuleNameFromRoute(array $parts): ?Module
+    private function getCurrentModuleNameFromRoute(array $parts): ?ModuleContract
     {
         foreach ($parts as $part) {
             if (in_array($part, array_keys($this->modules))) {
@@ -172,7 +171,7 @@ class ModuleLoader
     }
 
     /**
-     * @return Module[]
+     * @return ModuleContract[]
      */
     public function getModules(): array
     {
@@ -200,9 +199,9 @@ class ModuleLoader
     }
 
     /**
-     * @return Module|null
+     * @return ModuleContract|null
      */
-    public function getCurrentModule(): ?Module
+    public function getCurrentModule(): ?ModuleContract
     {
         return $this->currentModule;
     }
