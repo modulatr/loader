@@ -1,5 +1,10 @@
 # Modulatr Loader
 
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/modulatr/loader/develop.svg?style=flat-square)](https://travis-ci.org/modulatr/loader)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/modulatr/loader.svg?style=flat-square)](https://scrutinizer-ci.com/g/modulatr/loader/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/modulatr/loader.svg?style=flat-square)](https://scrutinizer-ci.com/g/modulatr/loader)
+
 Package for creating and loading modules in PHP projects.
 
 ## Installation via Composer
