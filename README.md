@@ -27,7 +27,7 @@ use Modulatr\Loader\Module;
 
 class Example extends Module
 {
-    public function getId():string
+    public function getId(): string
     {
         return 'example';
     }
