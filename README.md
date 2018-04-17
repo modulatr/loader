@@ -63,6 +63,3 @@ If you are using a framework such as Laravel, you might want to create the array
 
 Now, if you call `getCurrentModule()` on the loader, you will be returned your module class, as it's ID is `example` and
 the URI array contains the string `example`.
-
-## Licence
- 
