@@ -1,0 +1,26 @@
+{
+  "name": "modulatr/modulatr",
+  "description": "Modulatr - build and use Modules within your Laravel project",
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Modulatr\\Loader\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ModulatrTests\\Loader\\": "tests/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
