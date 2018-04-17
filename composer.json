@@ -1,6 +1,6 @@
 {
-  "name": "modulatr/modulatr",
-  "description": "Modulatr - build and use Modules within your Laravel project",
+  "name": "modulatr/loader",
+  "description": "Modulatr",
   "require": {
     "php": "^7.2"
   },
